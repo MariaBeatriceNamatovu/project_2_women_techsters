@@ -1,6 +1,5 @@
-//this file handles the simple heading
+//this file handles the simple heading at the top of the to-do list
 
-//this is a file to handle the progress bar when tasks are added
 
 const template = document.createElement('template');
 

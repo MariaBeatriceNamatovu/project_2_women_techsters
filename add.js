@@ -1,10 +1,19 @@
+//this file handles the addition of new items to the list, or removes them, and updates the progress depending on the degree of completion
+
+
+//defining the addition web component
 const template = document.createElement('template');
 template.innerHTML = 
 `
 <script src="https://kit.fontawesome.com/cada603cfc.js" crossorigin="anonymous"></script>
+
 <style>
+
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+//for the styling of the addition heading
 
 .add{
     display: flex;
@@ -34,6 +43,8 @@ h2 img{
     margin-left: 10px;
 }
 
+//for styling of the input field
+
 .row{
     display: flex;
     align-items: center;
@@ -53,6 +64,9 @@ input{
     font-weight: 14px;
     font-family: Poppins;
 }
+
+//for styling of the list section on addition of items to the list
+
 ul li{
     list-style: none;
     font-size: 17px;
@@ -76,7 +90,6 @@ ul li::before{
 }
 ul li.checked{
     color: #555;
-    text-decoration: line-through;
 
 }
 ul li.checked::before{
@@ -98,6 +111,9 @@ ul li span:hover{
     background: #edeef0;
 }
 
+
+//styling of the progress bar
+
 .progress {
     -webkit-appearance: none;
     width: 95%;
@@ -118,14 +134,9 @@ ul li span:hover{
     border: 6px solid #fff;
     box-shadow: 0 5px 5px rgba(255, 26, 26, 0.22);
 }
-// .progress::-webkit-slider-runnable-track {
-//     background: linear-gradient(to right, 
-//         red 0%,       /* 0% - 20% */
-//         yellow 20%,   /* 21% - 40% */
-//         orange 40%,   /* 41% - 60% */
-//         green 60%,    /* 61% - 100% */
-//         green 100%);  /* Ensure full progress is green */
-}
+
+
+//styling the progress percentage displayed
 
 #percentage{
     margin-left: 50%;
@@ -135,29 +146,37 @@ ul li span:hover{
 }
 </style>
 
+
+//addition header
+
 <div class="add">
 <h2>TODAY <img src="./assets/icon.png" alt=""></h2>
 <button class="add_more"><i class="fa-regular fa-square-plus"></i></button>
 </div>
 
-
+//input section
 
 <div class="row">
 <input type="text" id="input-box" placeholder="Add new task">
 <button onclick="addTask()" id="add-btn">Add</button>
 </div>
 
+
+//progress-bar
+
 <input type="range" class="progress">
 <p id="percentage"></p>
 
+
+//task-list section
 <ul id="list-container">
-
 </ul>
-
-
 
 `
 ;
+
+
+//definin the constructor section
 
 class Add extends HTMLElement{
     constructor(){
@@ -171,14 +190,18 @@ class Add extends HTMLElement{
 
         const plusButton = shadowRoot.querySelector('.add_more');
         plusButton.addEventListener('click', ()=>{
-            // to toggle the visibility of the input section and progress bar:
+            // to toggle the visibility of the input section and progress bar and the percentage displayed:
 
+            //input section
             const inputField = shadowRoot.querySelector('.row');
             inputField.style.display = inputField.style.display === 'none' ? 'flex' : 'none';
 
+
+            //progress bar
             const progressBar = shadowRoot.querySelector('.progress');
             progressBar.style.display = progressBar.style.display === 'none' ? 'block' : 'none';
 
+            //percentage display
             const progressPercentage = shadowRoot.querySelector('#percentage');
             progressPercentage.style.display = progressPercentage.style.display === 'none' ? 'block' : 'none';
         })
@@ -188,14 +211,23 @@ class Add extends HTMLElement{
         const inputBox = shadowRoot.getElementById("input-box");
         const listContainer = shadowRoot.getElementById("list-container");
         
+
+        //defining the add task function - to add tasks or remove tasks from the list
+
         function addTask(){
             if(inputBox.value === ''){
-                alert("You must write something!");
+                alert("You must write something!");      //if the user enters no value
         
             }else{
+
+                //creating new list element when the add button is clicked
                 let li = document.createElement("li");
+
+                //populate the li element with the value entered by the user
+
                 li.innerHTML = inputBox.value;
-                listContainer.appendChild(li)
+                listContainer.appendChild(li);
+
                 //to add a cross beside each item in the list;
                 let span = document.createElement("span");
                 span.innerHTML = "\u00d7";
@@ -210,6 +242,7 @@ class Add extends HTMLElement{
                 const progressBar = shadowRoot.querySelector('.progress');
                 progressBar.value = percentage;
     
+                //update the percentage displayed
                 const progressPercentage = shadowRoot.querySelector('#percentage');
                 progressPercentage.innerText = `${percentage}% Done`;
                 
@@ -227,10 +260,14 @@ class Add extends HTMLElement{
         
         //to add or remove an item from the list
         listContainer.addEventListener("click", function(e){
+
+            //if the item in the list is clicked, it's checked, or unchecked
             if(e.target.tagName === "LI"){
                 e.target.classList.toggle("checked");
                 saveData();
             }
+
+            //if the cross is clicked, the item is removed from the list
             else if(e.target.tagName === "SPAN"){
                 e.target.parentElement.remove();
                 saveData()
