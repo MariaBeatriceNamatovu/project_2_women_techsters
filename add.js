@@ -13,7 +13,7 @@ template.innerHTML =
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 
-//for the styling of the addition heading
+
 
 .add{
     display: flex;
@@ -43,7 +43,7 @@ h2 img{
     margin-left: 10px;
 }
 
-//for styling of the input field
+
 
 .row{
     display: flex;
@@ -65,7 +65,7 @@ input{
     font-family: Poppins;
 }
 
-//for styling of the list section on addition of items to the list
+
 
 ul li{
     list-style: none;
@@ -112,7 +112,7 @@ ul li span:hover{
 }
 
 
-//styling of the progress bar
+
 
 .progress {
     -webkit-appearance: none;
@@ -136,7 +136,7 @@ ul li span:hover{
 }
 
 
-//styling the progress percentage displayed
+
 
 #percentage{
     margin-left: 50%;
@@ -147,14 +147,14 @@ ul li span:hover{
 </style>
 
 
-//addition header
+
 
 <div class="add">
 <h2>TODAY <img src="./assets/icon.png" alt=""></h2>
 <button class="add_more"><i class="fa-regular fa-square-plus"></i></button>
 </div>
 
-//input section
+
 
 <div class="row">
 <input type="text" id="input-box" placeholder="Add new task">
@@ -162,13 +162,13 @@ ul li span:hover{
 </div>
 
 
-//progress-bar
+
 
 <input type="range" class="progress">
 <p id="percentage"></p>
 
 
-//task-list section
+
 <ul id="list-container">
 </ul>
 
